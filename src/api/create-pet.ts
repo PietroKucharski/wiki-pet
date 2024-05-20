@@ -4,12 +4,13 @@ export interface CreatePetBody {
   userId: string;
   name: string;
   petType: string;
-  age: number;
-  weight: number;
+  age: string;
+  weight: string;
   color: string;
   breed: string;
+  peculiarities: string;
+  microchip: string;
   neutered: boolean;
-  vaccines: string[];
 }
 
 export async function createPet(petData: CreatePetBody) {
