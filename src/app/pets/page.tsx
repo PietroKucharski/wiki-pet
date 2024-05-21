@@ -89,7 +89,6 @@ export default function Petlist() {
                   >
                     View
                   </DropdownMenuItem>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={() => {
