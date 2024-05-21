@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-export default function SignInLayout({
+export default function Providers({
   children,
 }: Readonly<{
   children: React.ReactNode;
