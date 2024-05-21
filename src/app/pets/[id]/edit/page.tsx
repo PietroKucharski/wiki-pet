@@ -28,11 +28,11 @@ import { useParams, useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { DropdownMenuDemo } from '../../../components/header/button';
-import { Textarea } from '../../../components/ui/textarea';
-import { Checkbox } from '../../../components/ui/checkbox';
-import { Switch } from '../../../components/ui/switch';
-import { Label } from '../../../components/ui/label';
+import { DropdownMenuDemo } from '../../../../components/header/button';
+import { Textarea } from '../../../../components/ui/textarea';
+import { Checkbox } from '../../../../components/ui/checkbox';
+import { Switch } from '../../../../components/ui/switch';
+import { Label } from '../../../../components/ui/label';
 import { PerfilImagePet } from '@/components/perfilIamgePet/perfilImagePet';
 
 const createPetFormValidation = z.object({
@@ -51,8 +51,16 @@ const createPetFormValidation = z.object({
 
 type CreatePetFormData = z.infer<typeof createPetFormValidation>;
 
-export default function CreatePetForm() {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function EditPetPage() {
   const router = useRouter();
+  const params = useParams();
+  console.log('>>>  ~ CreatePetForm ~ params:', params);
   const [avatar, setAvatar] = useState<File | null>(null);
 
   const { mutateAsync: createPetMutation } = useMutation({
@@ -77,8 +85,9 @@ export default function CreatePetForm() {
     //         userId: '2093u12eu21je128ej1298eh',
     //         id: crypto.randomUUID(),
     //         name: data.name,
-    //         petType: data.petType,
-    //         customPetType: data.customPetType,
+    //         petType:
+    //           data.petType === 'Outro' ? data.customPetType! : data.petType,
+    //         customPetType: pet?.petType ? pet?.petType : '',
     //         age: data.age,
     //         weight: parseFloat(data.weight), // Ensure weight is a number
     //         color: data.color,
@@ -97,22 +106,48 @@ export default function CreatePetForm() {
     // }
 
     try {
-      const oldPets = localStorage.getItem('pets') ?? '[]';
-      const oldPetsArray = JSON.parse(oldPets);
+      const allPets = localStorage.getItem('pets') ?? '[]';
+      const allPetsArray: any[] = JSON.parse(allPets);
+      let currentPet = allPetsArray.findIndex((pet) => pet.id === params.id);
+      if (currentPet === -1) {
+        alert('Pet não encontrado');
+        return;
+      }
+      allPetsArray[currentPet] = {
+        ...allPetsArray[currentPet],
+        ...data,
+      };
       //TODO: Fix this type
-      localStorage.setItem('pets', JSON.stringify([...oldPetsArray, data]));
-      toast.success('Pet cadastrado com sucesso');
-      router.push('/pets');
+      localStorage.setItem('pets', JSON.stringify([...allPetsArray]));
+      toast.success('Pet atualizado com sucesso');
+      router.push(`/pets/${params.id}`);
     } catch (error) {
       toast.error('Erro no cadastro');
     }
   }
 
+  const [pet, setPet] = useState(() => {
+    const storedPets = localStorage.getItem('pets') ?? '[]';
+    const pets = JSON.parse(storedPets);
+    //@ts-expect-error
+    return pets.find((pet) => pet.id === params.id);
+  });
+
   const form = useForm<CreatePetFormData>({
     resolver: zodResolver(createPetFormValidation),
     defaultValues: {
-      neutered: true,
-      id: crypto.randomUUID(),
+      id: pet?.id,
+      name: pet?.name,
+      petType: pet?.petType,
+      customPetType:
+        pet?.petType === 'Outro' ? pet?.customPetType : pet?.petType,
+      age: pet?.age,
+      weight: pet?.weight,
+      color: pet?.color,
+      breed: pet?.breed,
+      peculiarities: pet?.peculiarities,
+      microchip: pet?.microchip,
+      neutered: pet?.neutered,
     },
   });
 
@@ -130,24 +165,44 @@ export default function CreatePetForm() {
     }
   };
 
+  if (!pet) {
+    return (
+      <main className='flex flex-col gap-6 p-8'>
+        <div>
+          <h1 className='w-full text-3xl font-semibold'>Pet não encontrado</h1>
+          <Button
+            onClick={() => {
+              router.push('/pets');
+            }}
+            className='text-slate-800 p-0 px-1 h-fit'
+            variant={'link'}
+          >
+            Click here
+          </Button>
+          <span className='w-full text-sm text-muted-foreground'>
+            to return to the list of your pets
+          </span>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-center p-8'>
-      <DropdownMenuDemo />
-      <div className='flex flex-col z-10 w-full max-w-5xl items-center justify-center text-sm'>
-        <Image
-          alt='Logo'
-          src='/images/logos/logo.png'
-          sizes='100vw'
-          className='w-[140px] h-auto mb-8'
-          width={500}
-          height={300}
-        />
-        <h1 className='font-bold text-xl mb-4'>Cadastrar seu pet 🐶</h1>
+      <div className='flex justify-start self-start items-center'>
+        <Button
+          className='p-0 h-fit w-fit text-black'
+          variant={'link'}
+          type='button'
+          onClick={() => router.push(`/pets/${params.id}`)}
+        >
+          <ChevronLeft className='size-4' /> back to pet
+        </Button>
+      </div>
+      <div className='flex flex-col gap-4 z-10 w-full max-w-5xl items-center justify-center text-sm'>
+        <h1 className='font-bold text-xl'>Editar seu pet 🐶</h1>
         <div className='flex flex-col items-center'>
-          <label className='block text-sm font-medium text-gray-700'>
-            Upload Avatar
-          </label>
-          <div className='mt-2 flex flex-col items-center'>
+          <div className='gap-2 flex flex-col items-center'>
             <span className='inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100'>
               {avatar ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -358,7 +413,7 @@ export default function CreatePetForm() {
                 )}
               />
               <Button disabled={isSubmitting} className='mt-4 bg-[#fcc44a]'>
-                {isSubmitting ? 'Cadastrando…' : 'Cadastrar'}
+                {isSubmitting ? 'Salvando...' : 'Salvar'}
               </Button>
             </form>
           </Form>
