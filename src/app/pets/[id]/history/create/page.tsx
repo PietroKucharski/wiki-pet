@@ -1,6 +1,15 @@
 'use client';
 
-import { Form } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { describe } from 'node:test';
 import { title } from 'process';
@@ -108,7 +117,6 @@ export default function Page({}: PageProps) {
   const wasMedicated = form.watch('wasMedicated');
   const hadExams = form.watch('hadExams');
   const willReturn = form.watch('willReturn');
-  console.log(form.formState.errors);
   return (
     <div className='p-8'>
       <Form {...form}>
@@ -118,11 +126,21 @@ export default function Page({}: PageProps) {
             console.log(data);
           })}
         >
-          <input
-            {...form.register('date')}
-            type='date'
-            className='border border-gray-300 rounded-md p-2'
+          <FormField
+            control={form.control}
+            name='title'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder='Title' />
+                </FormControl>
+                <FormDescription>The title of the form</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
           />
+
           <input
             {...form.register('title')}
             type='text'
