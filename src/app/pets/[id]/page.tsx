@@ -21,7 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { MoreVertical } from 'lucide-react';
+import { ChevronLeft, MoreVertical } from 'lucide-react';
 interface PageProps {
   params: {
     id: string;
@@ -58,7 +58,14 @@ export default function Page({ params }: PageProps) {
 
   return (
     <div className='p-8 flex flex-col gap-4'>
-      {/* mock image above pet name */}
+      <Button
+        className='p-0 h-fit w-fit text-black'
+        variant={'link'}
+        type='button'
+        onClick={() => router.push(`/pets`)}
+      >
+        <ChevronLeft className='size-4' /> back to pet
+      </Button>
       <div className='flex justify-center'>
         <Image
           className='w-24 h-24 rounded-full select-none'
@@ -70,7 +77,7 @@ export default function Page({ params }: PageProps) {
       </div>
       <div className='text-center font-bold text-xl'>{pet.name}</div>
 
-      <Tabs defaultValue='history' className='w-full'>
+      <Tabs defaultValue='about' className='w-full'>
         <TabsList className='w-full'>
           <TabsTrigger className={'w-full'} value='about' defaultChecked>
             About
