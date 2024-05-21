@@ -13,11 +13,15 @@ export default function Page({ params }: PageProps) {
   const [pet, setPet] = useState<any>(() => {
     const storedPets = localStorage.getItem('pets') ?? '[]';
     const pets = JSON.parse(storedPets);
+    // TODO: Create this type
+    //@ts-expect-error
     return pets.find((pet) => pet.id === params.id);
   });
   const [history, setHistory] = useState<any[]>(() => {
     const history = localStorage.getItem('history') ?? '[]';
     const parsedHistory = JSON.parse(history);
+    // TODO: Create this type
+    //@ts-expect-error
     return parsedHistory.filter((item) => params.id === item.petId);
   });
 
