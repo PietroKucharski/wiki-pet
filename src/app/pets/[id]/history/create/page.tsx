@@ -12,11 +12,14 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { create } from 'domain';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { date, z } from 'zod';
+
+
 
 interface PageProps {
   params: {
@@ -80,6 +83,8 @@ const formBaseSchema = z.object({
   description: z.string().optional(),
   expenses: z.string().optional(),
   petId: z.string(),
+  id: z.string(),
+  createdAt: z.string(),
 });
 
 //Mix all schemas together to create the final schema
@@ -102,6 +107,8 @@ export default function Page({ params }: PageProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       petId: params.id ?? '',
+      createdAt: new Date().toISOString(),
+      id: crypto.randomUUID(),
       date: new Date().toISOString(),
       title: '',
       description: '',
@@ -147,7 +154,7 @@ export default function Page({ params }: PageProps) {
           type='button'
           onClick={() => router.push(`/pets`)}
         >
-          <ChevronLeft className='size-4' /> back to history
+          <ChevronLeft className='size-4' /> back to pet
         </Button>
         <div className='text-2xl font-semibold text-center'>No pet found</div>
       </div>
@@ -160,7 +167,12 @@ export default function Page({ params }: PageProps) {
         <form
           className='flex flex-col gap-4'
           onSubmit={form.handleSubmit((data) => {
-            console.log(data);
+            const storedHistoriesAsString =
+              localStorage.getItem('history') ?? '[]';
+            const storedHistories = JSON.parse(storedHistoriesAsString);
+            const updatedHistories = [...storedHistories, data];
+            localStorage.setItem('history', JSON.stringify(updatedHistories));
+            router.push(`/pets/${pet.id}?tab=history`);
           })}
         >
           <Button
@@ -169,7 +181,7 @@ export default function Page({ params }: PageProps) {
             type='button'
             onClick={() => router.push(`/pets/${pet.id}`)}
           >
-            <ChevronLeft className='size-4' /> back to history
+            <ChevronLeft className='size-4' /> back to pet
           </Button>
           <h1 className='text-2xl font-semibold'>Create History</h1>
 

@@ -100,7 +100,6 @@ export default function CreatePetForm() {
       // await createPetMutation(formData);
       const oldPets = localStorage.getItem('pets') ?? [];
       //TODO: Fix this type
-      //@ts-expect-error
       localStorage.setItem('pets', JSON.stringify([...oldPets, data]));
       toast.success('Pet cadastrado com sucesso');
       router.push('/pets');
@@ -151,6 +150,7 @@ export default function CreatePetForm() {
           <div className='mt-2 flex flex-col items-center'>
             <span className='inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100'>
               {avatar ? (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={URL.createObjectURL(avatar)}
                   alt='Avatar'
