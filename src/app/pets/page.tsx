@@ -98,7 +98,13 @@ export default function Page() {
         {pets.map((pet, index) => (
           <>
             <div className="p-4 border-4 border-gray-300 rounded-sm">
-              <Card key={pet.id} className="overflow-hidden w-full h-fit" onClick={() => {router.push(`/pets/${pet.id}`)}}>
+              <Card
+                key={pet.id}
+                className="overflow-hidden w-full h-fit"
+                onClick={() => {
+                  router.push(`/pets/${pet.id}`)
+                }}
+              >
                 <CardHeader className="w-full ">
                   <div className="flex justify-between items-center">
                     <div className="flex gap-4">
@@ -143,8 +149,8 @@ export default function Page() {
                 </CardHeader>
               </Card>
               <Pagination className="mt-4">
-                <PaginationPrevious />
-                <PaginationNext />
+                <PaginationPrevious className="cursor-pointer" />
+                <PaginationNext className="cursor-pointer" />
               </Pagination>
             </div>
           </>
