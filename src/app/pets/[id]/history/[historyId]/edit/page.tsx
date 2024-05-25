@@ -39,7 +39,7 @@ const returnFormSchema = z.object({
 const wentToVeterinaryUnion = z.discriminatedUnion('wentToVeterinary', [
   z.object({
     wentToVeterinary: z.literal(true),
-    vaccines: innerFormSchema,
+    vet: innerFormSchema,
   }),
   z.object({
     wentToVeterinary: z.literal(false),
@@ -134,7 +134,7 @@ export default function Page({ params }: PageProps) {
           type='button'
           onClick={() => router.push(`/pets`)}
         >
-          <ChevronLeft className='size-4' /> back to pet
+          <ChevronLeft className='size-4' /> Voltar aos pets
         </Button>
         <div className='text-2xl font-semibold text-center'>
           Something went wrong!
@@ -172,16 +172,16 @@ export default function Page({ params }: PageProps) {
             type='button'
             onClick={() => router.push(`/pets/${pet.id}`)}
           >
-            <ChevronLeft className='size-4' /> back to pet
+            <ChevronLeft className='size-4' /> Voltar ao pet
           </Button>
-          <h1 className='text-2xl font-semibold'>Edit History</h1>
+          <h1 className='text-2xl font-semibold'>Editar Histórico</h1>
 
           <FormField
             control={form.control}
             name='title'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>Titulo</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder='Title' />
                 </FormControl>
@@ -193,7 +193,7 @@ export default function Page({ params }: PageProps) {
           <textarea
             {...form.register('description')}
             rows={3}
-            placeholder='Description'
+            placeholder='Descrição'
             className='border border-gray-300 rounded-md p-2 max-h-40 min-h-11'
           />
           <div className='flex gap-4'>
@@ -203,23 +203,23 @@ export default function Page({ params }: PageProps) {
               type='checkbox'
               className='border border-gray-300 rounded-md p-2'
             />
-            <label htmlFor='wentToVeterinary'>Was Vaccinated</label>
+            <label htmlFor='wentToVeterinary'>Foi ao veterinário?</label>
           </div>
           {wentToVeterinary && (
             <div className='flex flex-col gap-4'>
               <input
-                {...form.register('vaccines.title')}
+                {...form.register('vet.title')}
                 type='text'
-                placeholder='Vaccine Title'
+                placeholder='Titulo do atendimento'
                 className='border border-gray-300 rounded-md p-2'
               />
               <textarea
-                {...form.register('vaccines.description')}
-                placeholder='Vaccine Description'
+                {...form.register('vet.description')}
+                placeholder='Descrição do atendimento'
                 className='border border-gray-300 rounded-md p-2'
               />
               <input
-                {...form.register('vaccines.files')}
+                {...form.register('vet.files')}
                 type='file'
                 multiple
                 className='border border-gray-300 rounded-md p-2'
@@ -234,19 +234,19 @@ export default function Page({ params }: PageProps) {
               type='checkbox'
               className='border border-gray-300 rounded-md p-2'
             />
-            <label htmlFor='wasMedicated'>Was Medicated</label>
+            <label htmlFor='wasMedicated'>Foi medicado?</label>
           </div>
           {wasMedicated && (
             <div className='flex flex-col gap-4'>
               <input
                 {...form.register('medications.title')}
                 type='text'
-                placeholder='Medication Title'
+                placeholder='Titulo'
                 className='border border-gray-300 rounded-md p-2'
               />
               <textarea
                 {...form.register('medications.description')}
-                placeholder='Medication Description'
+                placeholder='Descrição do medicamento'
                 className='border border-gray-300 rounded-md p-2'
               />
               <input
@@ -264,19 +264,19 @@ export default function Page({ params }: PageProps) {
               type='checkbox'
               className='border border-gray-300 rounded-md p-2'
             />
-            <label htmlFor='hadExams'>Had Exams</label>
+            <label htmlFor='hadExams'>Fez exames?</label>
           </div>
           {hadExams && (
             <div className='flex flex-col gap-4'>
               <input
                 {...form.register('exams.title')}
                 type='text'
-                placeholder='Exam Title'
+                placeholder='Titulo'
                 className='border border-gray-300 rounded-md p-2'
               />
               <textarea
                 {...form.register('exams.description')}
-                placeholder='Exam Description'
+                placeholder='Descrição do(s) exame(s)'
                 className='border border-gray-300 rounded-md p-2'
               />
               <input
@@ -295,7 +295,7 @@ export default function Page({ params }: PageProps) {
               type='checkbox'
               className='border border-gray-300 rounded-md p-2'
             />
-            <label htmlFor='willReturn'>Will Return</label>
+            <label htmlFor='willReturn'>Tem retorno?</label>
           </div>
           {willReturn && (
             <input
@@ -307,18 +307,18 @@ export default function Page({ params }: PageProps) {
 
           <FormField
             control={form.control}
-            name='expenses'
+            name='Gasto'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Expenses</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder='Expenses' />
+                  <Input {...field} placeholder='Insira os valores gastos...' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type='submit'>Save</Button>
+          <Button type='submit'>Salvar</Button>
         </form>
       </Form>
     </div>

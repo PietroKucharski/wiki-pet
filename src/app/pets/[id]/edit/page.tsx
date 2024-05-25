@@ -38,6 +38,7 @@ const createPetFormValidation = z.object({
   id: z.string(),
   name: z.string(),
   petType: z.string(),
+    gender: z.boolean(),
   customPetType: z.string().optional(),
   age: z.string(),
   weight: z.string(),
@@ -138,6 +139,7 @@ export default function EditPetPage() {
       id: pet?.id,
       name: pet?.name,
       petType: pet?.petType,
+        gender: pet?.gender,
       customPetType:
         pet?.petType === 'Outro' ? pet?.customPetType : pet?.petType,
       age: pet?.age,
@@ -195,11 +197,11 @@ export default function EditPetPage() {
           type='button'
           onClick={() => router.push(`/pets/${params.id}`)}
         >
-          <ChevronLeft className='size-4' /> Voltar ao pet
+          <ChevronLeft className='size-4' /> back to pet
         </Button>
       </div>
       <div className='flex flex-col gap-4 z-10 w-full max-w-5xl items-center justify-center text-sm'>
-        <h1 className='font-bold text-xl'>Editar seu pet 🐶😺</h1>
+        <h1 className='font-bold text-xl'>Editar seu pet 🐶</h1>
         <div className='flex flex-col items-center'>
           <div className='gap-2 flex flex-col items-center'>
             <span className='inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100'>
@@ -306,17 +308,37 @@ export default function EditPetPage() {
                   )}
                 />
               ) : null}
-              <FormField
-                control={control}
-                name='age'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Idade</FormLabel>
-                    <FormControl>
-                      <Input type='text' placeholder='Exemplo: 2' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+                <FormField
+                    control={control}
+                    name='gender'
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Idade</FormLabel>
+                            <FormControl>
+                                <div className='flex items-center space-x-2'>
+                                    <Switch
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                        id='gender'
+                                    />
+                                    <Label htmlFor='gender'>{field.value ? 'Macho' : 'Fêmea'}</Label>
+                                </div>
+                            </FormControl>
+                            <FormMessage/>
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={control}
+                    name='age'
+                    render={({field}) => (
+                        <FormItem>
+                            <FormLabel>Idade</FormLabel>
+                            <FormControl>
+                                <Input type='text' placeholder='Exemplo: 2' {...field} />
+                            </FormControl>
+                            <FormMessage/>
+                        </FormItem>
                 )}
               />
               <FormField
@@ -357,6 +379,23 @@ export default function EditPetPage() {
                     <FormLabel>Raça</FormLabel>
                     <FormControl>
                       <Input placeholder='Pitbull' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name='peculiarities'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Peculiaridades</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder='Diga-me uma peculiaridade...'
+                        className='resize-none'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
