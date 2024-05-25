@@ -15,7 +15,7 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {create} from 'domain';
 import {ChevronLeft} from 'lucide-react';
 import {useRouter} from 'next/navigation';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {date, z} from 'zod';
 
@@ -95,7 +95,7 @@ const formSchema = formBaseSchema
 
 export default function Page({params}: PageProps) {
     const [pet, setPet] = useState<any>(() => {
-        const storedPets = localStorage.getItem('pets') ?? '[]';
+        const storedPets = localStorage?.getItem('pets') ?? '[]';
         const pets = JSON.parse(storedPets);
         //TODO: Create this type
         //@ts-expect-error
@@ -137,16 +137,6 @@ export default function Page({params}: PageProps) {
         },
     });
 
-export default function Page({ params }: PageProps) {
-  const [pet, setPet] = useState<any>(() => {
-    const storedPets = localStorage?.getItem('pets') ?? '[]';
-    const pets = JSON.parse(storedPets);
-    //TODO: Create this type
-    //@ts-expect-error
-    return pets.find((pet) => pet.id === params.id);
-  });
-
-
     const router = useRouter();
 
     const wentToVeterinary = form.watch('wentToVeterinary');
@@ -163,7 +153,7 @@ export default function Page({ params }: PageProps) {
                     type='button'
                     onClick={() => router.push(`/pets`)}
                 >
-                    <ChevronLeft className='size-4'/> back to pet
+                    <ChevronLeft className='size-4'/> Voltar aos pets
                 </Button>
                 <div className='text-2xl font-semibold text-center'>No pet found</div>
             </div>
@@ -177,10 +167,10 @@ export default function Page({ params }: PageProps) {
                     className='flex flex-col gap-4'
                     onSubmit={form.handleSubmit((data) => {
                         const storedHistoriesAsString =
-                            localStorage.getItem('history') ?? '[]';
+                            localStorage?.getItem('history') ?? '[]';
                         const storedHistories = JSON.parse(storedHistoriesAsString);
                         const updatedHistories = [...storedHistories, data];
-                        localStorage.setItem('history', JSON.stringify(updatedHistories));
+                        localStorage?.setItem('history', JSON.stringify(updatedHistories));
                         router.push(`/pets/${pet.id}?tab=history`);
                     })}
                 >
@@ -209,29 +199,6 @@ export default function Page({ params }: PageProps) {
                         )}
                     />
 
-  return (
-    <div className='p-8'>
-      <Form {...form}>
-        <form
-          className='flex flex-col gap-4'
-          onSubmit={form.handleSubmit((data) => {
-            const storedHistoriesAsString =
-              localStorage?.getItem('history') ?? '[]';
-            const storedHistories = JSON.parse(storedHistoriesAsString);
-            const updatedHistories = [...storedHistories, data];
-            localStorage?.setItem('history', JSON.stringify(updatedHistories));
-            router.push(`/pets/${pet.id}?tab=history`);
-          })}
-        >
-          <Button
-            className='p-0 h-fit w-fit text-black'
-            variant={'link'}
-            type='button'
-            onClick={() => router.push(`/pets/${pet.id}`)}
-          >
-            <ChevronLeft className='size-4' /> back to pet
-          </Button>
-          <h1 className='text-2xl font-semibold'>Create History</h1>
                     <textarea
                         {...form.register('description')}
                         rows={3}
@@ -252,12 +219,12 @@ export default function Page({ params }: PageProps) {
                             <input
                                 {...form.register('vet.title')}
                                 type='text'
-                                placeholder='Titulo'
+                                placeholder='Titulo do atendimento'
                                 className='border border-gray-300 rounded-md p-2'
                             />
                             <textarea
                                 {...form.register('vet.description')}
-                                placeholder='Descrição do que foi feito'
+                                placeholder='Descrição do atendimento'
                                 className='border border-gray-300 rounded-md p-2'
                             />
                             <input
