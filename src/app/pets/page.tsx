@@ -1,9 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-
 import { useLayoutEffect, useState } from "react"
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,10 +17,10 @@ import {
 } from "@/components/ui/card"
 import {
   CalendarIcon,
+  ClipboardPen,
   LineChart,
   MoreVertical,
   Plus,
-  Syringe,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
@@ -95,80 +93,80 @@ export default function Page() {
             <Plus className="size-4 ml-2" />
           </Button>
         )}
-        {pets.map((pet, index) => (
-          <>
-            <div className="p-4 border-4 border-gray-300 rounded-sm">
-              <Card
-                key={pet.id}
-                className="overflow-hidden w-full h-fit"
-                onClick={() => {
-                  router.push(`/pets/${pet.id}`)
-                }}
-              >
-                <CardHeader className="w-full ">
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-4">
+        <div className="p-4 border-4 border-gray-300 rounded-sm flex flex-col gap-4">
+          {pets.map((pet, index) => (
+            <Card
+              key={pet.id}
+              className="overflow-hidden w-full h-fit"
+              onClick={() => {
+                router.push(`/pets/${pet.id}`)
+              }}
+            >
+              <CardHeader className="w-full ">
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-4">
+                    <div className="rounded-full">
                       <Image
                         src="/images/others/cachorro-caramelo.jpg"
-                        alt="iamge do pet"
+                        alt="image do pet"
                         width={100}
                         height={100}
                       />
-                      <div className="flex flex-col justify-between">
-                        <CardTitle className="line-clamp-2 break-words hyphens-auto ">
-                          {pet.name}
-                        </CardTitle>
-                        <CardDescription className="line-clamp-3 break-words hyphens-auto">
-                          {pet.breed} - {pet.color}
-                        </CardDescription>
-                      </div>
                     </div>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="w-fit h-fit">
-                        <MoreVertical className="size-5" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent side="left">
-                        <DropdownMenuItem
-                          onClick={() => {
-                            router.push(`/pets/${pet.id}`)
-                          }}
-                        >
-                          Visualizar
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          onClick={() => {
-                            handlePetDelete(pet.id)
-                          }}
-                        >
-                          Excluir
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <div className="flex flex-col justify-between">
+                      <CardTitle className="line-clamp-2 break-words hyphens-auto">
+                        {pet.name}
+                      </CardTitle>
+                      <CardDescription className="line-clamp-3 break-words hyphens-auto">
+                        {pet.breed} - {pet.color}
+                      </CardDescription>
+                    </div>
                   </div>
-                </CardHeader>
-              </Card>
-              <Pagination className="mt-4">
-                <PaginationPrevious className="cursor-pointer" />
-                <PaginationNext className="cursor-pointer" />
-              </Pagination>
-            </div>
-          </>
-        ))}
-        <div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="w-fit h-fit">
+                      <MoreVertical className="size-5" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent side="left">
+                      <DropdownMenuItem
+                        onClick={() => {
+                          router.push(`/pets/${pet.id}`)
+                        }}
+                      >
+                        Visualizar
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => {
+                          handlePetDelete(pet.id)
+                        }}
+                      >
+                        Excluir
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+        <Pagination className="w-full flex justify-end">
+          <PaginationPrevious className="cursor-pointer" />
+          <PaginationNext className="cursor-pointer" />
+        </Pagination>
+        <div className="max-w-full">
           <p className="font-bold">Em desenvolvimento</p>
-          <div className="flex gap-4">
-            <Button disabled>
-              <LineChart />
+          <div className="flex flex-wrap gap-4">
+            <Button className="flex-1 md:flex-none" disabled>
+              <LineChart className="mr-2" />
               Dashboard
             </Button>
-            <Button disabled>
-              <CalendarIcon />
+            <Button className="flex-1 md:flex-none" disabled>
+              <CalendarIcon className="mr-2" />
               Agenda
             </Button>
-            <Button disabled>
-              <Syringe />
-              Vacina
+            <Button className="flex-1 md:flex-none" disabled>
+              <ClipboardPen className="mr-2" />
+              Anotações
             </Button>
           </div>
         </div>
