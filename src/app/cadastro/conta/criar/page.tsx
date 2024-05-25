@@ -117,7 +117,7 @@ export default function CreateAccountForm() {
                   <FormItem>
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <Input type="tel"  placeholder="E-mail" {...field} />
+                      <Input type="text"  placeholder="(XX) XXXX-XXXX" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
