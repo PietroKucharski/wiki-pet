@@ -1,27 +1,25 @@
 'use client';
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { ChevronLeft, PlusCircleIcon, PlusIcon } from 'lucide-react';
@@ -30,45 +28,42 @@ import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import {DropdownMenuDemo} from '../../../components/header/button';
 import { Header } from '@/components/header/button';
 import { Textarea } from '@/components/ui/textarea';
-import {Checkbox} from '../../../components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import {PerfilImagePet} from '@/components/perfilIamgePet/perfilImagePet';
 
 const createPetFormValidation = z.object({
-    id: z.string(),
-    name: z.string(),
-    petType: z.string(),
+  id: z.string(),
+  name: z.string(),
+  petType: z.string(),
     gender: z.boolean(),
-    customPetType: z.string().optional(),
-    age: z.string(),
-    weight: z.string(),
-    color: z.string(),
-    breed: z.string(),
-    microchip: z.string(),
-    neutered: z.boolean(),
+  customPetType: z.string().optional(),
+  age: z.string(),
+  weight: z.string(),
+  color: z.string(),
+  breed: z.string(),
+  microchip: z.string(),
+  neutered: z.boolean(),
 });
 
 type CreatePetFormData = z.infer<typeof createPetFormValidation>;
 
 export default function CreatePetForm() {
-    const router = useRouter();
-    const [avatar, setAvatar] = useState<File | null>(null);
+  const router = useRouter();
+  const [avatar, setAvatar] = useState<File | null>(null);
 
-    const {mutateAsync: createPetMutation} = useMutation({
-        mutationFn: async (formData: FormData) => {
-            console.log('Dados do formulário antes de enviar:', formData); // Console log
-            const response = await axios.post(
-                `${process.env.REACT_APP_WIKIPET_API_URL}/pet/create`,
-                formData,
-                {headers: {'Content-Type': 'multipart/form-data'}}
-            );
-            return response.data;
-        },
-    });
+  const { mutateAsync: createPetMutation } = useMutation({
+    mutationFn: async (formData: FormData) => {
+      console.log('Dados do formulário antes de enviar:', formData); // Console log
+      const response = await axios.post(
+        `${process.env.REACT_APP_WIKIPET_API_URL}/pet/create`,
+        formData,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
+      return response.data;
+    },
+  });
 
   async function handleCreatePet(data: CreatePetFormData) {
     // const formData = new FormData();
@@ -109,32 +104,33 @@ export default function CreatePetForm() {
     } catch (error) {
       toast.error('Erro no cadastro');
     }
+  }
 
-    const form = useForm<CreatePetFormData>({
-        resolver: zodResolver(createPetFormValidation),
-        defaultValues: {
-            neutered: true,
-            id: crypto.randomUUID(),
-        },
-    });
+  const form = useForm<CreatePetFormData>({
+    resolver: zodResolver(createPetFormValidation),
+    defaultValues: {
+      neutered: true,
+      id: crypto.randomUUID(),
+    },
+  });
 
-    const {
-        handleSubmit,
-        formState: {isSubmitting},
-        control,
-        watch,
-    } = form;
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+    control,
+    watch,
+  } = form;
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setAvatar(file);
-        }
-    };
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setAvatar(file);
+    }
+  };
+
 
     return (
         <main className='flex min-h-screen flex-col items-center justify-center p-8'>
-            <DropdownMenuDemo/>
             <div className='flex flex-col z-10 w-full max-w-5xl items-center justify-center text-sm'>
                 <h1 className='font-bold text-xl mb-4'>Cadastrar seu pet 🐶😺</h1>
                 <div className='flex flex-col items-center'>
@@ -363,4 +359,4 @@ export default function CreatePetForm() {
             </div>
         </main>
     );
-}
+  };

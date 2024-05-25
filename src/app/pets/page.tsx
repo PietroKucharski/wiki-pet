@@ -19,7 +19,6 @@ import {
 } from '@/components/ui/card';
 import {MoreVertical, Plus} from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {DropdownMenuDemo} from "@/components/header/button";
 
 export default function Page() {
   const router = useRouter();
@@ -49,7 +48,6 @@ export default function Page() {
 
   return (
     <main className='flex flex-col gap-6 p-8'>
-      <DropdownMenuDemo/>
       <br></br>
       <div>
         <h1 className='w-full text-3xl font-semibold'>Meus Pets</h1>
