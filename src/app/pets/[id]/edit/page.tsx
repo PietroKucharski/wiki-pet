@@ -195,11 +195,11 @@ export default function EditPetPage() {
           type='button'
           onClick={() => router.push(`/pets/${params.id}`)}
         >
-          <ChevronLeft className='size-4' /> back to pet
+          <ChevronLeft className='size-4' /> Voltar ao pet
         </Button>
       </div>
       <div className='flex flex-col gap-4 z-10 w-full max-w-5xl items-center justify-center text-sm'>
-        <h1 className='font-bold text-xl'>Editar seu pet 🐶</h1>
+        <h1 className='font-bold text-xl'>Editar seu pet 🐶😺</h1>
         <div className='flex flex-col items-center'>
           <div className='gap-2 flex flex-col items-center'>
             <span className='inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100'>
@@ -357,23 +357,6 @@ export default function EditPetPage() {
                     <FormLabel>Raça</FormLabel>
                     <FormControl>
                       <Input placeholder='Pitbull' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={control}
-                name='peculiarities'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Peculiaridades</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder='Diga-me uma peculiaridade...'
-                        className='resize-none'
-                        {...field}
-                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
