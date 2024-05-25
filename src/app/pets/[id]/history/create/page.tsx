@@ -137,6 +137,16 @@ export default function Page({params}: PageProps) {
         },
     });
 
+export default function Page({ params }: PageProps) {
+  const [pet, setPet] = useState<any>(() => {
+    const storedPets = localStorage?.getItem('pets') ?? '[]';
+    const pets = JSON.parse(storedPets);
+    //TODO: Create this type
+    //@ts-expect-error
+    return pets.find((pet) => pet.id === params.id);
+  });
+
+
     const router = useRouter();
 
     const wentToVeterinary = form.watch('wentToVeterinary');
@@ -185,7 +195,6 @@ export default function Page({params}: PageProps) {
                     <div className='flex justify-center'>
                         <h1 className='font-bold text-xl mb-4'>Cadastrar Historico 📓</h1>
                     </div>
-
                     <FormField
                         control={form.control}
                         name='title'
@@ -200,6 +209,29 @@ export default function Page({params}: PageProps) {
                         )}
                     />
 
+  return (
+    <div className='p-8'>
+      <Form {...form}>
+        <form
+          className='flex flex-col gap-4'
+          onSubmit={form.handleSubmit((data) => {
+            const storedHistoriesAsString =
+              localStorage?.getItem('history') ?? '[]';
+            const storedHistories = JSON.parse(storedHistoriesAsString);
+            const updatedHistories = [...storedHistories, data];
+            localStorage?.setItem('history', JSON.stringify(updatedHistories));
+            router.push(`/pets/${pet.id}?tab=history`);
+          })}
+        >
+          <Button
+            className='p-0 h-fit w-fit text-black'
+            variant={'link'}
+            type='button'
+            onClick={() => router.push(`/pets/${pet.id}`)}
+          >
+            <ChevronLeft className='size-4' /> back to pet
+          </Button>
+          <h1 className='text-2xl font-semibold'>Create History</h1>
                     <textarea
                         {...form.register('description')}
                         rows={3}

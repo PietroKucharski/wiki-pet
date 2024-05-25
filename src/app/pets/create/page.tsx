@@ -2,9 +2,10 @@
 
 import React, {useState} from 'react';
 import axios from 'axios';
-import {Avatar} from '@/components/ui/avatar';
-import {Input} from '@/components/ui/input';
-import {Button} from '@/components/ui/button';
+
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
     Form,
     FormControl,
@@ -20,19 +21,21 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import {zodResolver} from '@hookform/resolvers/zod';
-import {useMutation} from '@tanstack/react-query';
-import {ChevronLeft} from 'lucide-react';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { ChevronLeft, PlusCircleIcon, PlusIcon } from 'lucide-react';
 import Image from 'next/image';
-import {useParams, useRouter} from 'next/navigation';
-import {FormProvider, useForm} from 'react-hook-form';
-import {toast} from 'sonner';
-import {z} from 'zod';
+import { useRouter } from 'next/navigation';
+import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 import {DropdownMenuDemo} from '../../../components/header/button';
-import {Textarea} from '../../../components/ui/textarea';
+import { Header } from '@/components/header/button';
+import { Textarea } from '@/components/ui/textarea';
 import {Checkbox} from '../../../components/ui/checkbox';
-import {Switch} from '../../../components/ui/switch';
-import {Label} from '../../../components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import {PerfilImagePet} from '@/components/perfilIamgePet/perfilImagePet';
 
 const createPetFormValidation = z.object({
@@ -67,45 +70,44 @@ export default function CreatePetForm() {
         },
     });
 
-    async function handleCreatePet(data: CreatePetFormData) {
-        // const formData = new FormData();
-        // formData.append(
-        //   'request',
-        //   new Blob(
-        //     [
-        //       JSON.stringify({
-        //         userId: '2093u12eu21je128ej1298eh',
-        //         id: crypto.randomUUID(),
-        //         name: data.name,
-        //         petType: data.petType,
-        //         customPetType: data.customPetType,
-        //         age: data.age,
-        //         weight: parseFloat(data.weight), // Ensure weight is a number
-        //         color: data.color,
-        //         breed: data.breed,
-        //         peculiarities: data.peculiarities,
-        //         microchip: data.microchip,
-        //         neutered: data.neutered,
-        //       }),
-        //     ],
-        //     { type: 'application/json' }
-        //   )
-        // );
+  async function handleCreatePet(data: CreatePetFormData) {
+    // const formData = new FormData();
+    // formData.append(
+    //     'request',
+    //     new Blob(
+    //         [
+    //             JSON.stringify({
+    //                 userId: '2093u12eu21je128ej1298eh',
+    //                 id: crypto.randomUUID(),
+    //                 name: data.name,
+    //                 petType:
+    //                     data.petType === 'Outro' ? data.customPetType! : data.petType,
+    //                 age: data.age,
+    //                 weight: parseFloat(data.weight), // Ensure weight is a number
+    //                 color: data.color,
+    //                 breed: data.breed,
+    //                 peculiarities: data.peculiarities,
+    //                 microchip: data.microchip,
+    //                 neutered: data.neutered,
+    //             }),
+    //         ],
+    //         {type: 'application/json'}
+    //     )
+    // );
 
-        // if (avatar) {
-        //   formData.append('image', avatar);
-        // }
+    // if (avatar) {
+    //     formData.append('image', avatar);
+    // }
 
-        try {
-            const oldPets = localStorage.getItem('pets') ?? '[]';
-            const oldPetsArray = JSON.parse(oldPets);
-            //TODO: Fix this type
-            localStorage.setItem('pets', JSON.stringify([...oldPetsArray, data]));
-            toast.success('Pet cadastrado com sucesso');
-            router.push('/pets');
-        } catch (error) {
-            toast.error('Erro no cadastro');
-        }
+    try {
+      const oldPets = localStorage?.getItem('pets') ?? '[]';
+      const oldPetsArray = JSON.parse(oldPets);
+      //TODO: Fix this type
+      localStorage?.setItem('pets', JSON.stringify([...oldPetsArray, data]));
+      toast.success('Pet cadastrado com sucesso');
+      router.push('/pets');
+    } catch (error) {
+      toast.error('Erro no cadastro');
     }
 
     const form = useForm<CreatePetFormData>({

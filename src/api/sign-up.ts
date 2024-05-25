@@ -7,5 +7,5 @@ export interface SignUpBody {
 
 export async function signUp({ email, password }: SignUpBody) {
   // await api.post("/authenticate", { email });
-  await sleep(4000);
+  await sleep(1000);
 }

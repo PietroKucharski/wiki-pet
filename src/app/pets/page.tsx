@@ -1,7 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+
+import { useLayoutEffect, useState } from 'react';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,26 +21,30 @@ import {MoreVertical, Plus} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {DropdownMenuDemo} from "@/components/header/button";
 
-export default function Petlist() {
+export default function Page() {
   const router = useRouter();
-  const [pets, setPets] = useState<any[]>(() => {
-    const storedPets = localStorage.getItem('pets') ?? '[]';
-    return JSON.parse(storedPets);
-  });
+  const [pets, setPets] = useState<any[]>([]);
+
+  useLayoutEffect(() => {
+    setPets(() => {
+      const storedPets = localStorage?.getItem('pets') ?? '[]';
+      return JSON.parse(storedPets);
+    });
+  }, []);
 
   const handlePetDelete = (id: string) => {
-    const storedPets = localStorage.getItem('pets') ?? '[]';
+    const storedPets = localStorage?.getItem('pets') ?? '[]';
     const pets = JSON.parse(storedPets);
     //@ts-expect-error
     const newPets = pets.filter((pet) => pet.id !== id);
-    localStorage.setItem('pets', JSON.stringify(newPets));
+    localStorage?.setItem('pets', JSON.stringify(newPets));
     setPets(newPets);
 
-    const storedHistory = localStorage.getItem('history') ?? '[]';
+    const storedHistory = localStorage?.getItem('history') ?? '[]';
     const history = JSON.parse(storedHistory);
     //@ts-expect-error
     const newHistory = history.filter((item) => item.petId !== id);
-    localStorage.setItem('history', JSON.stringify(newHistory));
+    localStorage?.setItem('history', JSON.stringify(newHistory));
   };
 
   return (

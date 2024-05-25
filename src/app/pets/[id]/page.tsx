@@ -32,7 +32,7 @@ interface PageProps {
 
 export default function Page({ params }: PageProps) {
   const [pet, setPet] = useState<any>(() => {
-    const storedPets = localStorage.getItem('pets') ?? '[]';
+    const storedPets = localStorage?.getItem('pets') ?? '[]';
     const pets = JSON.parse(storedPets);
     // TODO: Create this type
     //@ts-expect-error
@@ -40,7 +40,7 @@ export default function Page({ params }: PageProps) {
   });
 
   const [history, setHistory] = useState<any[]>(() => {
-    const history = localStorage.getItem('history') ?? '[]';
+    const history = localStorage?.getItem('history') ?? '[]';
     const parsedHistory = JSON.parse(history);
     // TODO: Create this type
     //@ts-expect-error
@@ -48,11 +48,11 @@ export default function Page({ params }: PageProps) {
   });
 
   function handleDeleteHistory(id: string) {
-    const history = localStorage.getItem('history') ?? '[]';
+    const history = localStorage?.getItem('history') ?? '[]';
     const parsedHistory = JSON.parse(history);
     //@ts-expect-error
     const newHistory = parsedHistory.filter((item) => item.id !== id);
-    localStorage.setItem('history', JSON.stringify(newHistory));
+    localStorage?.setItem('history', JSON.stringify(newHistory));
     setHistory(newHistory);
   }
 
@@ -113,6 +113,7 @@ export default function Page({ params }: PageProps) {
                           : typeof pet[key] === 'boolean'
                               ? pet[key] ? 'Sim' : 'Não'
                               : pet[key]}
+
 
                     </div>
                   </div>

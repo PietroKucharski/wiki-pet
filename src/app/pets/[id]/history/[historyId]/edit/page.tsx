@@ -95,7 +95,7 @@ const formSchema = formBaseSchema
 
 export default function Page({ params }: PageProps) {
   const [pet, setPet] = useState<any>(() => {
-    const storedPets = localStorage.getItem('pets') ?? '[]';
+    const storedPets = localStorage?.getItem('pets') ?? '[]';
     const pets = JSON.parse(storedPets);
     //TODO: Create this type
     //@ts-expect-error
@@ -103,7 +103,7 @@ export default function Page({ params }: PageProps) {
   });
 
   const [history, setHistory] = useState<any>(() => {
-    const history = localStorage.getItem('history') ?? '[]';
+    const history = localStorage?.getItem('history') ?? '[]';
     const parsedHistory = JSON.parse(history);
     //TODO: Create this type
     //@ts-expect-error
@@ -149,7 +149,7 @@ export default function Page({ params }: PageProps) {
         <form
           className='flex flex-col gap-4'
           onSubmit={form.handleSubmit((data) => {
-            const storedHistory = localStorage.getItem('history') ?? '[]';
+            const storedHistory = localStorage?.getItem('history') ?? '[]';
             const parsedHistory = JSON.parse(storedHistory);
             const index = parsedHistory.findIndex(
               //@ts-expect-error
@@ -162,7 +162,7 @@ export default function Page({ params }: PageProps) {
               ...parsedHistory[index],
               ...data,
             };
-            localStorage.setItem('history', JSON.stringify(parsedHistory));
+            localStorage?.setItem('history', JSON.stringify(parsedHistory));
             router.push(`/pets/${pet.id}`);
           })}
         >
