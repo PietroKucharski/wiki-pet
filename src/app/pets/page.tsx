@@ -113,7 +113,7 @@ export default function Page() {
                         height={100}
                       />
                     </div>
-                    <div className="flex flex-col justify-between">
+                    <div className="flex flex-col">
                       <CardTitle className="line-clamp-2 break-words hyphens-auto">
                         {pet.name}
                       </CardTitle>

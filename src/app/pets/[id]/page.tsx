@@ -96,7 +96,7 @@ export default function Page({ params }: PageProps) {
         <div className="text-center font-bold text-xl">{pet.name}</div>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="w-full">
+          <TabsList className="w-full bg-primary">
             <TabsTrigger className={"w-full"} value="about" defaultChecked>
               Sobre
             </TabsTrigger>
