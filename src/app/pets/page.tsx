@@ -6,19 +6,18 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
   Card,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { MoreVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
 export default function Petlist() {
   const router = useRouter();
   const [pets, setPets] = useState<any[]>(() => {
@@ -44,7 +43,6 @@ export default function Petlist() {
   return (
     <main className='flex flex-col gap-6 p-8'>
       <div>
-        
         <h1 className='w-full text-3xl font-semibold'>My Pets</h1>
         {!pets.length ? (
           <div className='leading-none'>
@@ -89,7 +87,6 @@ export default function Petlist() {
                   >
                     View
                   </DropdownMenuItem>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={() => {
