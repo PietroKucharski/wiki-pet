@@ -96,7 +96,7 @@ const formSchema = formBaseSchema
 
 export default function Page({ params }: PageProps) {
   const [pet, setPet] = useState<any>(() => {
-    const storedPets = localStorage.getItem('pets') ?? '[]';
+    const storedPets = localStorage?.getItem('pets') ?? '[]';
     const pets = JSON.parse(storedPets);
     //TODO: Create this type
     //@ts-expect-error
@@ -168,10 +168,10 @@ export default function Page({ params }: PageProps) {
           className='flex flex-col gap-4'
           onSubmit={form.handleSubmit((data) => {
             const storedHistoriesAsString =
-              localStorage.getItem('history') ?? '[]';
+              localStorage?.getItem('history') ?? '[]';
             const storedHistories = JSON.parse(storedHistoriesAsString);
             const updatedHistories = [...storedHistories, data];
-            localStorage.setItem('history', JSON.stringify(updatedHistories));
+            localStorage?.setItem('history', JSON.stringify(updatedHistories));
             router.push(`/pets/${pet.id}?tab=history`);
           })}
         >

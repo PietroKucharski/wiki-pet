@@ -105,7 +105,7 @@ export default function EditPetPage() {
     // }
 
     try {
-      const allPets = localStorage.getItem('pets') ?? '[]';
+      const allPets = localStorage?.getItem('pets') ?? '[]';
       const allPetsArray: any[] = JSON.parse(allPets);
       let currentPet = allPetsArray.findIndex((pet) => pet.id === params.id);
       if (currentPet === -1) {
@@ -117,7 +117,7 @@ export default function EditPetPage() {
         ...data,
       };
       //TODO: Fix this type
-      localStorage.setItem('pets', JSON.stringify([...allPetsArray]));
+      localStorage?.setItem('pets', JSON.stringify([...allPetsArray]));
       toast.success('Pet atualizado com sucesso');
       router.push(`/pets/${params.id}`);
     } catch (error) {
@@ -126,7 +126,7 @@ export default function EditPetPage() {
   }
 
   const [pet, setPet] = useState(() => {
-    const storedPets = localStorage.getItem('pets') ?? '[]';
+    const storedPets = localStorage?.getItem('pets') ?? '[]';
     const pets = JSON.parse(storedPets);
     //@ts-expect-error
     return pets.find((pet) => pet.id === params.id);

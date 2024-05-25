@@ -95,10 +95,10 @@ export default function CreatePetForm() {
         }
 
         try {
-            const oldPets = localStorage.getItem('pets') ?? '[]';
+            const oldPets = localStorage?.getItem('pets') ?? '[]';
             const oldPetsArray = JSON.parse(oldPets);
             //TODO: Fix this type
-            localStorage.setItem('pets', JSON.stringify([...oldPets, data]));
+            localStorage?.setItem('pets', JSON.stringify([...oldPets, data]));
             toast.success('Pet cadastrado com sucesso');
             router.push('/pets');
         } catch (error) {
