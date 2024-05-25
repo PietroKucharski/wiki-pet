@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useRouter } from "next/navigation"
@@ -58,121 +59,124 @@ export default function Page() {
   }
 
   return (
-    <>
-      <Header />
-      <main className="flex flex-col gap-6 p-8">
-        <div>
-          <h1 className="w-full text-3xl font-semibold">Meus Pets</h1>
-          {!pets.length ? (
-            <div className="leading-none">
+      <>
+        <Header />
+        <main className="flex flex-col gap-6 p-8">
+          <div>
+            <h1 className="w-full text-3xl font-semibold">Meus Pets</h1>
+            {!pets.length ? (
+                <div className="leading-none">
               <span className="w-full text-sm text-muted-foreground">
                 Você ainda não tem nenhum pet.
               </span>
-              <Button
-                onClick={() => {
-                  router.push("/pets/create")
-                }}
-                className="text-slate-800 p-0 px-1 h-fit"
-                variant={"link"}
-              >
-                Clique aqui
-              </Button>
-              <span className="w-full text-sm text-muted-foreground">
+                  <Button
+                      onClick={() => {
+                        router.push("/pets/create")
+                      }}
+                      className="text-slate-800 p-0 px-1 h-fit"
+                      variant={"link"}
+                  >
+                    Clique aqui
+                  </Button>
+                  <span className="w-full text-sm text-muted-foreground">
                 para cadastrar!
               </span>
-            </div>
-          ) : (
-            <span className="w-full text-sm text-muted-foreground">
+                </div>
+            ) : (
+                <span className="w-full text-sm text-muted-foreground">
               Você tem {pets.length} pet(s).
             </span>
-          )}
-        </div>
-        {pets.length > 0 && (
-          <Button type="button" onClick={() => router.push(`/pets/create`)}>
-            Adicionar novo pet
-            <Plus className="size-4 ml-2" />
-          </Button>
-        )}
-        <div className="p-4 border-4 border-gray-300 rounded-sm flex flex-col gap-4">
-          {pets.map((pet, index) => (
-            <Card
-              key={pet.id}
-              className="overflow-hidden w-full h-fit"
-              onClick={() => {
-                router.push(`/pets/${pet.id}`)
-              }}
-            >
-              <CardHeader className="w-full ">
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-4">
-                    <div className="rounded-full">
-                      <Image
-                        src="/images/others/cachorro-caramelo.jpg"
-                        alt="image do pet"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <CardTitle className="line-clamp-2 break-words hyphens-auto">
-                        {pet.name}
-                      </CardTitle>
-                      <CardDescription className="line-clamp-3 break-words hyphens-auto">
-                        {pet.breed} - {pet.color}
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="w-fit h-fit">
-                      <MoreVertical className="size-5" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="left">
-                      <DropdownMenuItem
-                        onClick={() => {
-                          router.push(`/pets/${pet.id}`)
-                        }}
-                      >
-                        Visualizar
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => {
-                          handlePetDelete(pet.id)
-                        }}
-                      >
-                        Excluir
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-        {pets.length > 10 && (
-          <Pagination className="w-full flex justify-end">
-            <PaginationPrevious className="cursor-pointer" />
-            <PaginationNext className="cursor-pointer" />
-          </Pagination>
-        )}
-        <div className="max-w-full">
-          <p className="font-bold">Em desenvolvimento</p>
-          <div className="flex flex-wrap gap-4">
-            <Button className="flex-1 md:flex-none" disabled>
-              <LineChart className="mr-2" />
-              Dashboard
-            </Button>
-            <Button className="flex-1 md:flex-none" disabled>
-              <CalendarIcon className="mr-2" />
-              Agenda
-            </Button>
-            <Button className="flex-1 md:flex-none" disabled>
-              <ClipboardPen className="mr-2" />
-              Anotações
-            </Button>
+            )}
           </div>
-        </div>
-      </main>
-    </>
+          {pets.length > 0 && (
+              <Button type="button" onClick={() => router.push(`/pets/create`)}>
+                Adicionar novo pet
+                <Plus className="size-4 ml-2" />
+              </Button>
+          )}
+          <div className="p-4 border-4 border-gray-300 rounded-sm flex flex-col gap-4">
+            {pets.map((pet, index) => (
+                <Card
+                    key={pet.id}
+                    className="overflow-hidden w-full h-fit"
+                    onClick={() => {
+                      router.push(`/pets/${pet.id}`)
+                    }}
+                >
+                  <CardHeader className="w-full ">
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-4">
+                        <div className="rounded-full">
+                          <Image
+                              src="/images/others/cachorro-caramelo.jpg"
+                              alt="image do pet"
+                              width={100}
+                              height={100}
+                          />
+                        </div>
+                        <div className="flex flex-col justify-between">
+                          <CardTitle className="line-clamp-2 break-words hyphens-auto">
+                            {pet.name}
+                          </CardTitle>
+                          <CardDescription className="line-clamp-3 break-words hyphens-auto">
+                            {pet.breed} - {pet.color}
+                          </CardDescription>
+                        </div>
+                      </div>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="w-fit h-fit">
+                          <MoreVertical className="size-5" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent side="left">
+                          <DropdownMenuItem
+                              onClick={() => {
+                                router.push(`/pets/${pet.id}`)
+                              }}
+                          >
+                            Visualizar
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                              onClick={() => {
+                                handlePetDelete(pet.id)
+                              }}
+                          >
+                            Excluir
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </CardHeader>
+                </Card>
+            ))}
+          </div>
+          {pets.length > 10 && (
+              <Pagination className="w-full flex justify-end">
+                <PaginationPrevious className="cursor-pointer" />
+                <PaginationNext className="cursor-pointer" />
+              </Pagination>
+          )}
+          <div className="max-w-full">
+            <Card className="p-4">
+              <p className="font-bold">Em desenvolvimento</p>
+              <br/>
+              <div className="flex flex-wrap gap-4">
+                <Button className="flex-1 md:flex-none" disabled>
+                  <LineChart className="mr-2" />
+                  Dashboard
+                </Button>
+                <Button className="flex-1 md:flex-none" disabled>
+                  <CalendarIcon className="mr-2" />
+                  Agenda
+                </Button>
+                <Button className="flex-1 md:flex-none" disabled>
+                  <ClipboardPen className="mr-2" />
+                  Anotações
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </main>
+      </>
   )
 }

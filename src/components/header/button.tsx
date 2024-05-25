@@ -38,7 +38,7 @@ export function Header() {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
                     <DropdownMenuSeparator/>
                     <DropdownMenuGroup>
                         <DropdownMenuItem
@@ -47,29 +47,29 @@ export function Header() {
                             }}
                         >
                             <User className="mr-2 h-4 w-4"/>
-                            <span>Profile</span>
+                            <span>Perfil(<b>Em desenvolvimento</b>)</span>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                router.push("/pets")
+                            }}
+                        >
                             <DogIcon className="mr-2 h-4 w-4"/>
-                            <span>Pet</span>
+                            <span>Pets</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                             <Settings className="mr-2 h-4 w-4"/>
-                            <span>Settings</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Clipboard className="mr-2 h-4 w-4"/>
-                            <span>History</span>
+                            <span>Configurações(<b>Em desenvolvimento</b>)</span>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuItem>
                         <LifeBuoy className="mr-2 h-4 w-4"/>
-                        <span>Support</span>
+                        <span>Support(<b>Em desenvolvimento</b>)</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator/>
                     <DropdownMenuItem>
                         <LogOut className="mr-2 h-4 w-4"/>
-                        <span>Log out</span>
+                        <span>Sair</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

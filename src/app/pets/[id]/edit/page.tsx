@@ -386,23 +386,6 @@ export default function EditPetPage() {
               />
               <FormField
                 control={control}
-                name='peculiarities'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Peculiaridades</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder='Diga-me uma peculiaridade...'
-                        className='resize-none'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={control}
                 name='microchip'
                 render={({ field }) => (
                   <FormItem>
