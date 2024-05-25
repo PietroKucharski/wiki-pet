@@ -149,10 +149,12 @@ export default function Page() {
             </Card>
           ))}
         </div>
-        <Pagination className="w-full flex justify-end">
-          <PaginationPrevious className="cursor-pointer" />
-          <PaginationNext className="cursor-pointer" />
-        </Pagination>
+        {pets.length > 10 && (
+          <Pagination className="w-full flex justify-end">
+            <PaginationPrevious className="cursor-pointer" />
+            <PaginationNext className="cursor-pointer" />
+          </Pagination>
+        )}
         <div className="max-w-full">
           <p className="font-bold">Em desenvolvimento</p>
           <div className="flex flex-wrap gap-4">
