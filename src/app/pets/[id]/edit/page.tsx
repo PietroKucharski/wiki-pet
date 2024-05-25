@@ -23,16 +23,13 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { ChevronLeft } from 'lucide-react';
-import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { Textarea } from '../../../../components/ui/textarea';
-import { Checkbox } from '../../../../components/ui/checkbox';
-import { Switch } from '../../../../components/ui/switch';
-import { Label } from '../../../../components/ui/label';
-import { PerfilImagePet } from '@/components/perfilIamgePet/perfilImagePet';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 const createPetFormValidation = z.object({
   id: z.string(),
