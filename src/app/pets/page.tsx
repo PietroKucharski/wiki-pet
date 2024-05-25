@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,8 +15,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { MoreVertical } from 'lucide-react';
+import {MoreVertical, Plus} from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {DropdownMenuDemo} from "@/components/header/button";
 
 export default function Petlist() {
   const router = useRouter();
@@ -42,12 +43,14 @@ export default function Petlist() {
 
   return (
     <main className='flex flex-col gap-6 p-8'>
+      <DropdownMenuDemo/>
+      <br></br>
       <div>
-        <h1 className='w-full text-3xl font-semibold'>My Pets</h1>
+        <h1 className='w-full text-3xl font-semibold'>Meus Pets</h1>
         {!pets.length ? (
           <div className='leading-none'>
             <span className='w-full text-sm text-muted-foreground'>
-              You don&apos;t have any pets yet.
+              Você ainda não tem nenhum pet.
             </span>
             <Button
               onClick={() => {
@@ -56,18 +59,28 @@ export default function Petlist() {
               className='text-slate-800 p-0 px-1 h-fit'
               variant={'link'}
             >
-              Click here
+              Clique aqui
             </Button>
             <span className='w-full text-sm text-muted-foreground'>
-              to get started!
+              para cadastrar!
             </span>
           </div>
         ) : (
           <span className='w-full text-sm text-muted-foreground'>
-            You have {pets.length} pets.
+            Você tem {pets.length} pet(s).
           </span>
         )}
       </div>
+      {pets.length > 0 && (
+          <Button
+              className='p-0 h-fit w-fit text-black self-end'
+              variant={'link'}
+              type='button'
+              onClick={() => router.push(`/pets/create`)}
+          >
+            <Plus className='size-4'/> Adicionar novo pet
+          </Button>
+      )}
       {pets.map((pet, index) => (
         <Card key={pet.id} className='overflow-hidden w-full h-fit'>
           <CardHeader className='w-full '>
@@ -85,7 +98,7 @@ export default function Petlist() {
                       router.push(`/pets/${pet.id}`);
                     }}
                   >
-                    View
+                    Visualizar
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
@@ -93,7 +106,7 @@ export default function Petlist() {
                       handlePetDelete(pet.id);
                     }}
                   >
-                    Remove
+                    Excluir
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

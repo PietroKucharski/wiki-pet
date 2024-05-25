@@ -1,23 +1,23 @@
 interface Pet {
   petType: string;
+  gender: boolean;
   age: string;
   weight: string;
   color: string;
   breed: number;
-  peculiarities: string;
   microchip: string;
-  neutered: string;
+  neutered: boolean;
 }
 
 enum PetKeysToLabel {
-  petType = 'Pet Type',
-  age = 'Age',
-  weight = 'Weight',
-  color = 'Color',
-  breed = 'Breed',
-  peculiarities = 'Peculiarities',
+  petType = 'Tipo',
+  gender = 'Gênero',
+  age = 'Idade',
+  weight = 'Peso',
+  color = 'Cor',
+  breed = 'Raça',
   microchip = 'Microchip',
-  neutered = 'Neutered',
+  neutered = 'Castrado',
 }
 
 export function renamePetObjectKey(key: keyof Pet | (string & {})) {

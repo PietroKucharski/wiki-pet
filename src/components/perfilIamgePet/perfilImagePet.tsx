@@ -35,7 +35,7 @@ export function PerfilImagePet() {
 
     return (
         <div className="flex flex-col items-center avatar-upload">
-            <label className="block text-lg font-bold text-gray-700">Upload Avatar</label>
+            <label className="block text-lg font-bold text-gray-700">Imagem</label>
             <div className="mt-2 flex flex-col items-center">
                 <span className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100">
                     {avatar ? (
@@ -55,14 +55,14 @@ export function PerfilImagePet() {
                         <Button
                             type="button"
                             className="px-4 py-2 text-white rounded">
-                            Choose Image
+                            Selecione a imagem
                         </Button>
                     </div>
                     {avatar && (
                         <Button
                             onClick={handleRemoveImage}
                             className="px-4 py-2 bg-red-500 text-white rounded">
-                            Remove Image
+                            Remover a imagem
                         </Button>
                     )}
                 </div>
