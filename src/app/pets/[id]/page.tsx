@@ -78,13 +78,7 @@ export default function Page({ params }: PageProps) {
         </Button>
       </div>
       <div className='flex justify-center'>
-        <Image
-          className='w-24 h-24 rounded-full select-none'
-          src='https://via.placeholder.com/150'
-          alt={pet.name}
-          width={150}
-          height={150}
-        />
+        <div className='w-32 h-32 rounded-full select-none bg-slate-200'></div>
       </div>
       <div className='text-center font-bold text-xl'>{pet.name}</div>
 
@@ -197,6 +191,11 @@ export default function Page({ params }: PageProps) {
           )}
         </TabsContent>
       </Tabs>
+      {/* <div>
+        <div>Vacinas</div>
+        <div>Anotações</div>
+        <div>Vermifugos</div>
+      </div> */}
     </div>
   );
 }

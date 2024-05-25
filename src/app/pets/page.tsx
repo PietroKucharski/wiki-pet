@@ -23,8 +23,10 @@ export default function Page() {
   const [pets, setPets] = useState<any[]>([]);
 
   useLayoutEffect(() => {
-    const storedPets = localStorage?.getItem('pets') ?? '[]';
-    return JSON.parse(storedPets);
+    setPets(() => {
+      const storedPets = localStorage?.getItem('pets') ?? '[]';
+      return JSON.parse(storedPets);
+    });
   }, []);
 
   const handlePetDelete = (id: string) => {
