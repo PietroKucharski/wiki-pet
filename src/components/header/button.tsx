@@ -21,7 +21,6 @@ import {
 import {useRouter} from "next/navigation"
 import React from "react";
 import Image from "next/image";
-
 export function Header() {
     const router = useRouter()
 
@@ -45,8 +44,9 @@ export function Header() {
                             onClick={() => {
                                 router.replace("/cadastro/conta/entrar")
                             }}
+                            disabled
                         >
-                            <User className="mr-2 h-4 w-4"/>
+                            <User className="mr-2 h-4 w-4" />
                             <span>Perfil(<b>Em desenvolvimento</b>)</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem
@@ -57,17 +57,17 @@ export function Header() {
                             <DogIcon className="mr-2 h-4 w-4"/>
                             <span>Pets</span>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem disabled>
                             <Settings className="mr-2 h-4 w-4"/>
                             <span>Configurações(<b>Em desenvolvimento</b>)</span>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem disabled>
                         <LifeBuoy className="mr-2 h-4 w-4"/>
                         <span>Support(<b>Em desenvolvimento</b>)</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator/>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem disabled>
                         <LogOut className="mr-2 h-4 w-4"/>
                         <span>Sair</span>
                     </DropdownMenuItem>
