@@ -226,17 +226,17 @@ export default function EditPetPage() {
                 />
                 <button
                   type='button'
-                  className='px-4 py-2 bg-blue-500 text-white rounded'
+                  className='px-4 py-2 bg-primary rounded'
                 >
-                  Choose Image
+                  Selecionar
                 </button>
               </div>
               {avatar && (
                 <button
                   onClick={() => setAvatar(null)}
-                  className='px-4 py-2 bg-red-500 text-white rounded'
+                  className='px-4 py-2 bg-red-500 rounded'
                 >
-                  Remove Image
+                  Remover
                 </button>
               )}
             </div>

@@ -160,20 +160,21 @@ export default function CreatePetForm() {
                                 />
                                 <button
                                     type='button'
-                                    className='px-4 py-2 bg-blue-500 text-white rounded'
+                                    className='px-4 py-2 bg-primary rounded'
                                 >
-                                    Selecione a imagem
+                                    Selecionar
                                 </button>
                             </div>
                             {avatar && (
                                 <button
                                     onClick={() => setAvatar(null)}
-                                    className='px-4 py-2 bg-red-500 text-white rounded'
+                                    className='px-4 py-2 bg-red-500  rounded'
                                 >
-                                    Remova a imagem
+                                    Remover
                                 </button>
                             )}
                         </div>
+                        <br/>
                     </div>
                 </div>
                 <FormProvider {...form}>

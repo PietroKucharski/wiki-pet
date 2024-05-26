@@ -106,7 +106,7 @@ export default function Page() {
                   <CardHeader className="w-full ">
                     <div className="flex justify-between items-center">
                       <div className="flex gap-4">
-                        <div className="rounded-full">
+                        <div className="rounded-full overflow-hidden">
                           <Image
                               src="/images/others/catanddog.png"
                               alt="image do pet"
@@ -114,21 +114,21 @@ export default function Page() {
                               height={100}
                           />
                         </div>
-                        <div className="flex flex-col justify-between ">
-                          <CardTitle className="line-clamp-2 break-words hyphens-auto">
+                        <div className="flex flex-col  space-y-3">
+                          <CardTitle className="line-clamp-2 break-words hyphens-auto mt-4">
                             {pet.name}
                           </CardTitle>
-                          <CardDescription className="line-clamp-3 break-words hyphens-auto">
+                          <CardDescription className="line-clamp-3 break-words ">
                             {pet.breed} - {pet.color}
                           </CardDescription>
                         </div>
                       </div>
                       <DropdownMenu>
                         <DropdownMenuTrigger className="w-fit h-fit">
-                          <MoreVertical className="size-5" />
+                          <MoreVertical className="size-5"/>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent side="left">
-                          <DropdownMenuItem
+                        <DropdownMenuItem
                               onClick={() => {
                                 router.push(`/pets/${pet.id}`)
                               }}
