@@ -37,13 +37,13 @@ const createPetFormValidation = z.object({
   id: z.string(),
   name: z.string(),
   petType: z.string(),
-    gender: z.boolean(),
+  gender: z.boolean(),
   customPetType: z.string().optional(),
   age: z.string(),
   weight: z.string(),
   color: z.string(),
-  breed: z.string(),
-  microchip: z.string(),
+  breed: z.string().optional(),
+  microchip: z.string().optional(),
   neutered: z.boolean(),
 });
 
@@ -344,7 +344,7 @@ export default function CreatePetForm() {
                                                     onCheckedChange={field.onChange}
                                                     id='neutered'
                                                 />
-                                                <Label htmlFor='neutered'>Castrado</Label>
+                                                <Label htmlFor='neutered'>Castrado(a)</Label>
                                             </div>
                                         </FormControl>
                                         <FormMessage/>

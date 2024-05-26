@@ -177,7 +177,7 @@ export default function Page({ params }: PageProps) {
                                 </DropdownMenuItem>
                                 <DropdownMenuItem disabled>
                                   <FaEye className="mr-2"/>
-                                  Visualizar (Em desenvolvimento)
+                                  Visualizar (<b>Em desenvolvimento</b>)
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator/>
                                 <DropdownMenuItem
@@ -191,7 +191,7 @@ export default function Page({ params }: PageProps) {
                                 <DropdownMenuSeparator/>
                                 <DropdownMenuItem onClick={handleShare} disabled>
                                   <FaShareAlt className="mr-2"/>
-                                  Compartilhar (Em desenvolvimento)
+                                  Compartilhar (<b>Em desenvolvimento</b>)
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
 
