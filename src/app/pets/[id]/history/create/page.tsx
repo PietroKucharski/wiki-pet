@@ -184,160 +184,161 @@ export default function Page({ params }: PageProps) {
             >
               <ChevronLeft className="size-4" />
             </Button>
-            <div className="flex justify-center">
-              <h1 className="font-bold text-xl mb-4">Cadastrar Historico 📓</h1>
-            </div>
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Titulo</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Titulo" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+            <div className="p-4 flex flex-col gap-3 border-2 border-gray-200 rounded-md ">
+              <div className="flex justify-center">
+                <h1 className="font-bold text-xl mb-4">
+                  Cadastrar Historico 📓
+                </h1>
+              </div>
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Titulo</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Titulo" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <textarea
+                {...form.register("description")}
+                rows={3}
+                placeholder="Descrição"
+                className="border border-gray-300 rounded-md p-2 max-h-40 min-h-11"
+              />
+              <div className="flex gap-4">
+                <input
+                  id="wentToVeterinary"
+                  {...form.register("wentToVeterinary")}
+                  type="checkbox"
+                  className="border border-gray-300 rounded-md p-2"
+                />
+                <label htmlFor="wentToVeterinary">Foi ao veterinário?</label>
+              </div>
+              {wentToVeterinary && (
+                <div className="flex flex-col gap-4">
+                  <input
+                    {...form.register("vet.title")}
+                    type="text"
+                    placeholder="Titulo do atendimento"
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                  <textarea
+                    {...form.register("vet.description")}
+                    placeholder="Descrição do atendimento"
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                  <input
+                    {...form.register("vet.files")}
+                    type="file"
+                    multiple
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                </div>
               )}
-            />
 
-            <textarea
-              {...form.register("description")}
-              rows={3}
-              placeholder="Descrição"
-              className="border border-gray-300 rounded-md p-2 max-h-40 min-h-11"
-            />
-            <div className="flex gap-4">
-              <input
-                id="wentToVeterinary"
-                {...form.register("wentToVeterinary")}
-                type="checkbox"
-                className="border border-gray-300 rounded-md p-2"
-              />
-              <label htmlFor="wentToVeterinary">Foi ao veterinário?</label>
-            </div>
-            {wentToVeterinary && (
-              <div className="flex flex-col gap-4">
+              <div className="flex gap-4">
                 <input
-                  {...form.register("vet.title")}
-                  type="text"
-                  placeholder="Titulo do atendimento"
+                  id="wasMedicated"
+                  {...form.register("wasMedicated")}
+                  type="checkbox"
                   className="border border-gray-300 rounded-md p-2"
                 />
-                <textarea
-                  {...form.register("vet.description")}
-                  placeholder="Descrição do atendimento"
-                  className="border border-gray-300 rounded-md p-2"
-                />
-                <input
-                  {...form.register("vet.files")}
-                  type="file"
-                  multiple
-                  className="border border-gray-300 rounded-md p-2"
-                />
+                <label htmlFor="wasMedicated">Foi medicado?</label>
               </div>
-            )}
-
-            <div className="flex gap-4">
-              <input
-                id="wasMedicated"
-                {...form.register("wasMedicated")}
-                type="checkbox"
-                className="border border-gray-300 rounded-md p-2"
-              />
-              <label htmlFor="wasMedicated">Foi medicado?</label>
-            </div>
-            {wasMedicated && (
-              <div className="flex flex-col gap-4">
-                <input
-                  {...form.register("medications.title")}
-                  type="text"
-                  placeholder="Titulo"
-                  className="border border-gray-300 rounded-md p-2"
-                />
-                <textarea
-                  {...form.register("medications.description")}
-                  placeholder="Descrição do medicamento"
-                  className="border border-gray-300 rounded-md p-2"
-                />
-                <input
-                  {...form.register("medications.files")}
-                  type="file"
-                  multiple
-                  className="border border-gray-300 rounded-md p-2"
-                />
-              </div>
-            )}
-            <div className="flex gap-4">
-              <input
-                id="hadExams"
-                {...form.register("hadExams")}
-                type="checkbox"
-                className="border border-gray-300 rounded-md p-2"
-              />
-              <label htmlFor="hadExams">Fez exames?</label>
-            </div>
-            {hadExams && (
-              <div className="flex flex-col gap-4">
-                <input
-                  {...form.register("exams.title")}
-                  type="text"
-                  placeholder="Titulo"
-                  className="border border-gray-300 rounded-md p-2"
-                />
-                <textarea
-                  {...form.register("exams.description")}
-                  placeholder="Descrição do(s) exame(s)"
-                  className="border border-gray-300 rounded-md p-2"
-                />
-                <input
-                  {...form.register("exams.files")}
-                  type="file"
-                  multiple
-                  className="border border-gray-300 rounded-md p-2"
-                />
-              </div>
-            )}
-
-            <div className="flex gap-4">
-              <input
-                id="willReturn"
-                {...form.register("willReturn")}
-                type="checkbox"
-                className="border border-gray-300 rounded-md p-2"
-              />
-              <label htmlFor="willReturn">Tem retorno?</label>
-            </div>
-            {willReturn && (
-              <input
-                {...form.register("return.date")}
-                type="date"
-                className="border border-gray-300 rounded-md p-2"
-              />
-            )}
-
-            <FormField
-              control={form.control}
-              name="expenses"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Gastos</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Insira o valor que foi gasto..."
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              {wasMedicated && (
+                <div className="flex flex-col gap-4">
+                  <input
+                    {...form.register("medications.title")}
+                    type="text"
+                    placeholder="Titulo"
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                  <textarea
+                    {...form.register("medications.description")}
+                    placeholder="Descrição do medicamento"
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                  <input
+                    {...form.register("medications.files")}
+                    type="file"
+                    multiple
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                </div>
               )}
-            />
-            <button
-              type="submit"
-              className="bg-primary p-2 rounded-md"
-            >
-              Criar Histórico
-            </button>
+              <div className="flex gap-4">
+                <input
+                  id="hadExams"
+                  {...form.register("hadExams")}
+                  type="checkbox"
+                  className="border border-gray-300 rounded-md p-2"
+                />
+                <label htmlFor="hadExams">Fez exames?</label>
+              </div>
+              {hadExams && (
+                <div className="flex flex-col gap-4">
+                  <input
+                    {...form.register("exams.title")}
+                    type="text"
+                    placeholder="Titulo"
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                  <textarea
+                    {...form.register("exams.description")}
+                    placeholder="Descrição do(s) exame(s)"
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                  <input
+                    {...form.register("exams.files")}
+                    type="file"
+                    multiple
+                    className="border border-gray-300 rounded-md p-2"
+                  />
+                </div>
+              )}
+
+              <div className="flex gap-4">
+                <input
+                  id="willReturn"
+                  {...form.register("willReturn")}
+                  type="checkbox"
+                  className="border border-gray-300 rounded-md p-2"
+                />
+                <label htmlFor="willReturn">Tem retorno?</label>
+              </div>
+              {willReturn && (
+                <input
+                  {...form.register("return.date")}
+                  type="date"
+                  className="border border-gray-300 rounded-md p-2"
+                />
+              )}
+
+              <FormField
+                control={form.control}
+                name="expenses"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gastos</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Insira o valor que foi gasto..."
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <button type="submit" className="bg-primary p-2 rounded-md">
+                Criar Histórico
+              </button>
+            </div>
           </form>
         </Form>
       </div>
