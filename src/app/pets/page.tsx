@@ -2,7 +2,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useLayoutEffect, useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,6 +31,7 @@ import {
   PaginationPrevious,
 } from "../../components/ui/pagination"
 import { Header } from "../../components/header/button"
+import {FaEye, FaTrash} from "react-icons/fa6";
 
 export default function Page() {
   const router = useRouter()
@@ -133,6 +134,7 @@ export default function Page() {
                                 router.push(`/pets/${pet.id}`)
                               }}
                           >
+                            <FaEye className="mr-2"/>
                             Visualizar
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
@@ -141,6 +143,7 @@ export default function Page() {
                                 handlePetDelete(pet.id)
                               }}
                           >
+                            <FaTrash className="mr-2"/>
                             Excluir
                           </DropdownMenuItem>
                         </DropdownMenuContent>

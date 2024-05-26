@@ -22,10 +22,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { FaSyringe, FaCalendarAlt, FaDog, FaHeartbeat } from 'react-icons/fa';
+import {FaSyringe, FaCalendarAlt, FaDog, FaHeartbeat, FaShareAlt, FaEdit} from 'react-icons/fa';
 import {CalendarIcon, ChevronLeft, ClipboardPen, Edit, LineChart, MoreVertical, Plus} from "lucide-react"
 import { renamePetObjectKey } from "@/lib/pets"
 import { Header } from "../../../components/header/button"
+import {FaEye, FaTrash} from "react-icons/fa6";
 interface PageProps {
   params: {
     id: string
@@ -56,6 +57,19 @@ export default function Page({ params }: PageProps) {
     const newHistory = parsedHistory.filter((item) => item.id !== id)
     localStorage?.setItem("history", JSON.stringify(newHistory))
     setHistory(newHistory)
+  }
+
+  function handleShare() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Perfil do Pet',
+        text: `Confira o perfil do pet ${pet.name}`,
+        url: window.location.href,
+      })
+          .catch((error) => console.log('Erro ao compartilhar', error));
+    } else {
+      console.log('Compartilhamento não suportado neste navegador');
+    }
   }
 
   const router = useRouter()
@@ -155,23 +169,32 @@ export default function Page({ params }: PageProps) {
                               <DropdownMenuContent side="left">
                                 <DropdownMenuItem
                                     onClick={() => {
-                                      router.push(
-                                          `/pets/${params.id}/history/${item.id}/edit`
-                                      )
+                                      router.push(`/pets/${params.id}/history/${item.id}/edit`)
                                     }}
                                 >
+                                  <FaEdit className="mr-2"/>
                                   Editar
                                 </DropdownMenuItem>
-                                <DropdownMenuItem disabled>Visualizar(<b>Em desenvolvimento</b>)</DropdownMenuItem>
+                                <DropdownMenuItem disabled>
+                                  <FaEye className="mr-2"/>
+                                  Visualizar (Em desenvolvimento)
+                                </DropdownMenuItem>
                                 <DropdownMenuSeparator/>
                                 <DropdownMenuItem
                                     onClick={() => {
                                       handleDeleteHistory(item.id)
                                     }}
                                 >
+                                  <FaTrash className="mr-2"/>
                                   Excluir
                                 </DropdownMenuItem>
+                                <DropdownMenuSeparator/>
+                                <DropdownMenuItem onClick={handleShare} disabled>
+                                  <FaShareAlt className="mr-2"/>
+                                  Compartilhar (Em desenvolvimento)
+                                </DropdownMenuItem>
                               </DropdownMenuContent>
+
                             </DropdownMenu>
                           </div>
                           {!!item?.description && (
