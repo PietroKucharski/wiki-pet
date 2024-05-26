@@ -197,7 +197,7 @@ export default function EditPetPage() {
           type='button'
           onClick={() => router.push(`/pets/${params.id}`)}
         >
-          <ChevronLeft className='size-4' /> back to pet
+          <ChevronLeft className='size-4' />
         </Button>
       </div>
       <div className='flex flex-col gap-4 z-10 w-full max-w-5xl items-center justify-center text-sm'>

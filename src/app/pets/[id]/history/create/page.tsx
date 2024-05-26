@@ -153,7 +153,7 @@ export default function Page({ params }: PageProps) {
           type="button"
           onClick={() => router.push(`/pets`)}
         >
-          <ChevronLeft className="size-4" /> Voltar aos pets
+          <ChevronLeft className="size-4" />
         </Button>
         <div className="text-2xl font-semibold text-center">No pet found</div>
       </div>
@@ -334,7 +334,7 @@ export default function Page({ params }: PageProps) {
             />
             <button
               type="submit"
-              className="bg-primary text-white p-2 rounded-md"
+              className="bg-primary p-2 rounded-md"
             >
               Criar Histórico
             </button>

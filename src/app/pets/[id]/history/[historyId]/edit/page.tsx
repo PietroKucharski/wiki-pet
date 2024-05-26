@@ -134,7 +134,7 @@ export default function Page({ params }: PageProps) {
           type='button'
           onClick={() => router.push(`/pets`)}
         >
-          <ChevronLeft className='size-4' /> Voltar aos pets
+          <ChevronLeft className='size-4' />
         </Button>
         <div className='text-2xl font-semibold text-center'>
           Something went wrong!
@@ -172,7 +172,7 @@ export default function Page({ params }: PageProps) {
             type='button'
             onClick={() => router.push(`/pets/${pet.id}`)}
           >
-            <ChevronLeft className='size-4' /> Voltar ao pet
+            <ChevronLeft className='size-4' />
           </Button>
           <h1 className='text-2xl font-semibold'>Editar Histórico</h1>
 
