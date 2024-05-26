@@ -90,7 +90,7 @@ export default function Page() {
           </div>
           {pets.length > 0 && (
               <Button type="button" onClick={() => router.push(`/pets/create`)}>
-                Adicionar novo pet
+                Cadastrar novo pet
                 <Plus className="size-4 ml-2" />
               </Button>
           )}
@@ -108,13 +108,13 @@ export default function Page() {
                       <div className="flex gap-4">
                         <div className="rounded-full">
                           <Image
-                              src="/images/others/cachorro-caramelo.jpg"
+                              src="/images/others/catanddog.png"
                               alt="image do pet"
                               width={100}
                               height={100}
                           />
                         </div>
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col justify-between ">
                           <CardTitle className="line-clamp-2 break-words hyphens-auto">
                             {pet.name}
                           </CardTitle>

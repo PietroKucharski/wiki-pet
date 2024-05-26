@@ -310,7 +310,7 @@ export default function Page({ params }: PageProps) {
             name='Gasto'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Expenses</FormLabel>
+                <FormLabel>Gasto</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder='Insira os valores gastos...' />
                 </FormControl>

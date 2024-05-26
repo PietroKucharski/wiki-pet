@@ -159,16 +159,16 @@ export default function Page({ params }: PageProps) {
                                 )
                               }}
                             >
-                              Edit
+                              Editar
                             </DropdownMenuItem>
-                            <DropdownMenuItem disabled>View</DropdownMenuItem>
+                            <DropdownMenuItem disabled>Visualizar(<b>Em desenvolvimento</b>)</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                               onClick={() => {
                                 handleDeleteHistory(item.id)
                               }}
                             >
-                              Delete
+                              Excluir
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
