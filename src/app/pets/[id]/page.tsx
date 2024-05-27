@@ -262,12 +262,22 @@ export default function Page({ params }: PageProps) {
             <p className="font-bold">Em desenvolvimento</p>
             <br />
             <div className="flex flex-wrap gap-4">
-              <Button className="flex-1 md:flex-none" disabled>
-                <FaSyringe className="mr-2" />
+              <Button
+                  className="flex-1 md:flex-none"
+                  onClick={() => router.push(`/pets/${params.id}/vaccine/create`)}
+                  disabled
+
+              >
+                <FaSyringe className="mr-2"/>
                 Vacinas
               </Button>
-              <Button className="flex-1 md:flex-none" disabled>
-                <FaCalendarAlt className="mr-2" />
+              <Button
+                  className="flex-1 md:flex-none"
+                  onClick={() => router.push(`/pets/${params.id}/vermifuge/create`)}
+                  disabled
+
+              >
+                <FaCalendarAlt className="mr-2"/>
                 Vermífugos
               </Button>
               <Button className="flex-1 md:flex-none" disabled>
